@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductsModule } from './products/products.module';
 
-// todo: adicionar o usuário e senha do banco de dados em variáveis de ambiente 
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,6 +28,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         }
       }
     }),
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
