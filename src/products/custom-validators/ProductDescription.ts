@@ -32,8 +32,7 @@ export class ProductDescription implements ValidatorConstraintInterface {
       client`;
     const result = await model.generateContent(prompt);
     const response = result.response;
-    const isValid =
-      !response.text().toLowerCase().includes('invalid');
+    const isValid = !response.text().toLowerCase().includes('invalid');
     if (!isValid) this.message = response.text();
     return isValid;
   }
