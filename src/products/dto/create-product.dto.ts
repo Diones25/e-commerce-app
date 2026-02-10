@@ -14,8 +14,8 @@ export class CreateProductDto {
   @IsString({
     message: 'A descrição deve ser uma string.',
   })
-  @Length(5, 25, {
-    message: 'A descrição deve ter entre 5 e 25 caracteres.',
+  @Length(5, 50, {
+    message: 'A descrição deve ter entre 5 e 50 caracteres.',
   })
   description: string;
 
