@@ -46,8 +46,19 @@ export class OrdersService {
     }
   }
 
-  findAll() {
-    return `This action returns all orders`;
+  async findAll(page: number = 1, limit: number = 10) {
+    const orders = await this.orderRepository.find({
+      skip: (page - 1) * limit,
+      take: limit,
+      relations: [
+        'product',
+        // 'customer', <-- Uncomment this line after
+        // creating the User entity
+      ],
+    });
+    return {
+      orders
+    }
   }
 
   findOne(id: number) {
