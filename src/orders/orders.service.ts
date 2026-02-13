@@ -61,15 +61,25 @@ export class OrdersService {
     }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(id: string) {
+    const order = await this.orderRepository.findOne({
+      where: { id },
+      relations: [
+        'product',
+        // 'customer', <-- Uncomment this line after
+        // creating the User entity
+      ]
+    });
+    return {
+      order,
+    };
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
+  update(id: string, updateOrderDto: UpdateOrderDto) {
     return `This action updates a #${id} order`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} order`;
   }
 }
