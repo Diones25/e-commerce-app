@@ -11,7 +11,7 @@ export class CreateOrderDto {
   productId: string;  
 
   @IsPositive({
-    message: 'quantity must be a positive number'
+    message: 'A quantidade deve ser um número positivo.'
   })
   quantity: number;
   @IsDecimal(
@@ -19,7 +19,7 @@ export class CreateOrderDto {
       decimal_digits: '2'
     },
     {
-      message: 'totalPrice must be a decimal number'
+      message: 'O totalPrice deve ser um número decimal com duas casas decimais.'
     },
   )
   totalPrice: number;
