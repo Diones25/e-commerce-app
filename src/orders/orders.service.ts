@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -17,8 +17,33 @@ export class OrdersService {
     private readonly productRepository: Repository<Product>,
   ) {}
 
-  create(createOrderDto: CreateOrderDto) {
-    return 'This action adds a new order';
+  async create(createOrderDto: CreateOrderDto) {
+    try {
+      const { productId, quantity, totalPrice } = createOrderDto;
+      const product = await this.productRepository.findOne({ where: { id: productId } });
+
+      if (!product) {
+        throw new NotFoundException('Product not found');
+      }
+
+      const order = this.orderRepository.create({
+        product,
+        quantity,
+        totalPrice,
+      });
+
+      await this.orderRepository.save(order);
+
+      return {
+        message: 'Order created successfully',
+        order,
+      }
+    } catch (error) {
+      return {
+        message: 'Ocorreu um erro!',
+        error,
+      }
+    }
   }
 
   findAll() {
