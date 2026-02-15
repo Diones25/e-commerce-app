@@ -1,0 +1,41 @@
+@baseUrl = http://localhost:3333
+
+//Produtos
+### Criar um novo produto
+POST {{baseUrl}}/products
+Content-Type: application/json
+
+{
+  "name": "Macbook Pro M3",
+  "description": "This product is a Macbook.",
+  "price": "1999.99",
+  "image": "https://www.apple.com/newsroom/images/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/article/Apple-iPhone-15-Pro-lineup-hero-230912_Full-Bleed-Image.jpg.large.jpg",
+  "specs": {
+    "ram": "16Go",
+    "ssd": "1To",
+    "chip": "M3",
+    "condition": "like new",
+    "brand": "Apple",
+    "model": "Macbook Pro",
+    "color": "grey",
+    "year": "2023"
+  }
+}
+
+### Listar todos os produtos
+GET {{baseUrl}}/products
+
+### Listar um produto específico
+GET {{baseUrl}}/products/7d9975a5-1043-4096-b3e3-d5db474a57d8
+
+//Orders
+### Criar um novo pedido (Order)
+POST http://localhost:3333/orders
+Content-Type: application/json
+
+{
+  "productId": "7d9975a5-1043-4096-b3e3-d5db474a57d8",
+  "customerId": "7d9975a5-1043-4096-b3e3-d5db474a57d8",
+  "quantity": 4,
+  "totalPrice": "124.53"
+}
