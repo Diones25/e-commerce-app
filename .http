@@ -4,7 +4,7 @@
 ### Criar um novo produto
 POST {{baseUrl}}/products
 Content-Type: application/json
-
+//Authorization: Bearer SEU_TOKEN_AQUI
 {
   "name": "Macbook Pro M3",
   "description": "This product is a Macbook.",
