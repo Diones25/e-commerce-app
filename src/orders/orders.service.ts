@@ -77,6 +77,11 @@ export class OrdersService {
         // creating the User entity
       ]
     });
+
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+
     return {
       order,
     };
