@@ -55,6 +55,13 @@ export class OrdersService {
         // 'customer', <-- Uncomment this line after
         // creating the User entity
       ],
+      select: {
+        product: {
+          name: true,
+          price: true,
+          image: true
+        }
+      }
     });
     return {
       orders
