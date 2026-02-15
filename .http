@@ -39,3 +39,9 @@ Content-Type: application/json
   "quantity": 4,
   "totalPrice": "124.53"
 }
+
+### Listar todos os pedidos
+GET {{baseUrl}}/orders
+
+### Listar um pedido específico
+GET {{baseUrl}}/orders/1
