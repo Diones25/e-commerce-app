@@ -6,8 +6,8 @@ export class CreateOrderDto {
   @IsUUID('all', { message: 'customerId deve ser um UUID válido.' })
   customerId: string;
 
-  @IsString({ message: 'productId must be a string' })
-  @IsUUID('all', { message: 'productId must be a valid UUID' })
+  @IsString({ message: 'productId deve ser uma string' })
+  @IsUUID('all', { message: 'productId deve ser um UUID válido.' })
   productId: string;  
 
   @IsPositive({

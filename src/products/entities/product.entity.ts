@@ -21,7 +21,7 @@ export class Product {
 
   @Column('simple-json', {
     default: {},
-    comment: "a key-value pair that represents the product's specs",
+    comment: " um par chave-valor que representa as especificações do produto",
   })
   specs: Record<string, any>;
 

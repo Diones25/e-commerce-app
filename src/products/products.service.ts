@@ -17,7 +17,7 @@ export class ProductsService {
     const product = this.productsRepository.create(createProductDto);
     await this.productsRepository.save(product);
     return {
-      message: 'Product created successfully',
+      message: 'Produto criado com sucesso',
       product,
     }
   }
@@ -38,7 +38,7 @@ export class ProductsService {
     });
 
     if (!product) {
-      throw new NotFoundException('Product not found');
+      throw new NotFoundException('Produto não encontrado');
     }
 
     return {
@@ -47,10 +47,10 @@ export class ProductsService {
   }
 
   update(id: string, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return `Atualizando o produto #${id}`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  remove(id: string) {
+    return `Removendo o produto #${id}`;
   }
 }

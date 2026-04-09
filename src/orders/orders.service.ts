@@ -23,7 +23,7 @@ export class OrdersService {
       const product = await this.productRepository.findOne({ where: { id: productId } });
 
       if (!product) {
-        throw new NotFoundException('Product not found');
+        throw new NotFoundException('Produto não encontrado');
       }
 
       const order = this.orderRepository.create({
@@ -35,7 +35,7 @@ export class OrdersService {
       await this.orderRepository.save(order);
 
       return {
-        message: 'Order created successfully',
+        message: 'Pedido criado com sucesso',
         order,
       }
     } catch (error) {
@@ -79,7 +79,7 @@ export class OrdersService {
     });
 
     if (!order) {
-      throw new NotFoundException('Order not found');
+      throw new NotFoundException('Pedido não encontrado');
     }
 
     return {
@@ -88,10 +88,10 @@ export class OrdersService {
   }
 
   update(id: string, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
+    return `Atualizando o pedido #${id}`;
   }
 
   remove(id: string) {
-    return `This action removes a #${id} order`;
+    return `Removendo o pedido #${id}`;
   }
 }
