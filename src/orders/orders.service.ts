@@ -46,7 +46,7 @@ export class OrdersService {
     }
   }
 
-  async findAll(page: number = 1, limit: number = 10) {
+  async getOrders(page: number = 1, limit: number = 10) {
     const orders = await this.orderRepository.find({
       skip: (page - 1) * limit,
       take: limit,
@@ -68,7 +68,7 @@ export class OrdersService {
     }
   }
 
-  async findOne(id: string) {
+  async getOrderById(id: string) {
     const order = await this.orderRepository.findOne({
       where: { id },
       relations: [
