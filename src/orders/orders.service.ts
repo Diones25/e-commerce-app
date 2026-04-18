@@ -66,8 +66,12 @@ export class OrdersService {
         }
       }
     });
+
+    const totalItems = await this.orderRepository.count();
+    const meta = this.paginationService.getPaginationMeta(page, limit, totalItems);
     return {
-      orders
+      orders,
+      meta,
     }
   }
 
