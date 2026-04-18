@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { Repository } from 'typeorm';
 import { Product } from '../products/entities/product.entity';
+import { PaginationService } from '../common/pagination/pagination.service';
 
 @Injectable()
 export class OrdersService {
@@ -15,6 +16,8 @@ export class OrdersService {
 
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
+
+    private readonly paginationService: PaginationService,
   ) {}
 
   async create(createOrderDto: CreateOrderDto) {
