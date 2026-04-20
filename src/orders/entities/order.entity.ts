@@ -1,3 +1,4 @@
+import { User } from "src/users/entities/user.entity";
 import { Product } from "../../products/entities/product.entity";
 import {
   Column,
@@ -22,8 +23,8 @@ export class Order {
   @Column()
   quantity: number;
 
-  // @ManyToOne(() => User, (user) => user.orders)
-  // customer: User;
+  @ManyToOne(() => User, (user) => user.orders)
+  customer: User;
 
   @Column({ default: OrderStatus.PENDING })
   status: OrderStatus;
