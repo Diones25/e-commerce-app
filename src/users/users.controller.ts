@@ -3,14 +3,15 @@ import {
   Get,
   Post,
   Body,
-  Param
+  Param,
+  Query
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -18,11 +19,16 @@ export class UsersController {
   }
 
   @Get()
+  findAll(@Query('page') page: number, @Query('limit') limit: number) {
+    return this.usersService.findAll(page, limit);
+  }
+
+  @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.getUserById(id);
   }
 
-  @Get(':id')
+  @Get(':username')
   findOneByUsername(@Param('username') username: string) {
     return this.usersService.getUserByUsername(username);
   }
