@@ -37,9 +37,6 @@ import { AuthModule } from './auth/auth.module';
     CommonModule,
     UsersModule,
     AuthModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
   ],
   controllers: [],
   providers: [],
