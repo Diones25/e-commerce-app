@@ -13,5 +13,6 @@ import { PaginationService } from 'src/common/pagination/pagination.service';
   ],
   controllers: [UsersController],
   providers: [UsersService, PaginationService],
+  exports: [UsersService]
 })
 export class UsersModule {}
