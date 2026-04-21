@@ -6,7 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 
 @Module({
-  providers: [AuthService],
+  providers: [AuthService, UsersModule],
   imports: [
     UsersModule,
     JwtModule.registerAsync({
