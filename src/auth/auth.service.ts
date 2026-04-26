@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
@@ -11,42 +11,37 @@ export class AuthService {
   constructor(
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async login(username: string, password: string) {
-    try {
-      const user = await this.userService.getUserByUsername(username);
-      if (await this.verifyPassword(user, password, user.password)) {
-        const { password: _, ...userWithoutPassword } = user;
-        const accessToken = await this.jwtService.signAsync({ sub: userWithoutPassword.id, username: userWithoutPassword.username });
-        return {
-          message: 'Login realizado com sucesso',
-          data: {
-            ...userWithoutPassword,
-            accessToken,
-          },
-        };
-      }
-      return {
-        message: 'Nome de usuário ou senha inválidos',
-        data: null,
-      };
-    } catch (error) {
-      return error;
+    const user = await this.userService.getUserByUsername(username);
+
+    if (!user || !(await this.verifyPassword(user, password, user.password))) {
+      throw new UnauthorizedException('Nome de usuário ou senha inválidos');
     }
+
+    const { password: _, ...userWithoutPassword } = user;
+    const accessToken = await this.jwtService.signAsync({
+      sub: userWithoutPassword.id,
+      username: userWithoutPassword.username
+    });
+
+    return {
+      message: 'Login realizado com sucesso',
+      data: {
+        ...userWithoutPassword,
+        accessToken,
+      },
+    };
   }
 
   async signup(createUserDto: CreateUserDto) {
-    try {
-      const hashedPassword = this.hashPassword(createUserDto.password);
-      const newUser: CreateUserDto = {
-        ...createUserDto,
-        password: hashedPassword,
-      };
-      return await this.userService.create(newUser);
-    } catch (error) {
-      return error;
-    }
+    const hashedPassword = this.hashPassword(createUserDto.password);
+    const newUser: CreateUserDto = {
+      ...createUserDto,
+      password: hashedPassword,
+    };
+    return await this.userService.create(newUser);
   }
 
   hashPassword(password: string) {
