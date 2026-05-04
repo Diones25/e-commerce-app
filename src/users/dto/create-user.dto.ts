@@ -15,7 +15,7 @@ export class CreateUserDto {
       minSymbols: 1,
     }, 
     {
-      message: 'A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula, um número e um símbolo'
+      message: 'A senha deve conter 8 caracteres, pelo menos uma letra minúscula, uma letra maiúscula, um número e um símbolo'
     }
   )
   password: string;
